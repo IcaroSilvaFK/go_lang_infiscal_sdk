@@ -1,6 +1,10 @@
 package client
 
-import "time"
+import (
+	"time"
+
+	"github.com/IcaroSilvaFK/go_lang_infiscal/cmd/helpers"
+)
 
 type ClientCredentials struct {
 	ServiceTokenKey string
@@ -30,7 +34,7 @@ type InfiscalClient struct {
 }
 
 type InfiscalClientConfig interface {
-	GetAllSecrets() []SecretBundle
+	GetAllSecrets() map[string]string
 	GetSecret(name string, options string) SecretBundle
 	CreateSecret(name, value string) SecretBundle
 	DeleteSecret(name string)
@@ -48,8 +52,15 @@ func NewInfiscalClient(
 	}
 }
 
-func (c *InfiscalClient) GetAllSecrets() []SecretBundle {
-	return []SecretBundle{}
+func (c *InfiscalClient) GetAllSecrets() map[string]string {
+
+	cachedSecrets := helpers.ReturnAll()
+
+	if helpers.HasLenInArray(cachedSecrets) {
+		return cachedSecrets
+	}
+
+	return map[string]string{}
 }
 func (c *InfiscalClient) GetSecret(name string, options string) SecretBundle {
 	return SecretBundle{}
