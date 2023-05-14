@@ -1,9 +1,5 @@
 package helpers
 
-import (
-	"fmt"
-)
-
 var cache = make(map[string]string)
 
 func SetCache(k, v string) bool {
@@ -20,7 +16,6 @@ func SetCache(k, v string) bool {
 
 			return true
 		} else {
-			fmt.Println("else :", k, v)
 			cache[k] = v
 			return true
 		}
@@ -43,4 +38,14 @@ func GetCache(k string) (string, bool) {
 	}
 
 	return v, true
+}
+
+func ReturnAll() map[string]string {
+
+	return cache
+}
+
+func ClearCache() bool {
+	cache = make(map[string]string)
+	return true
 }

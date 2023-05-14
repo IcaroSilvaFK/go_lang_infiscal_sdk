@@ -32,5 +32,29 @@ func TestGetCache(t *testing.T) {
 
 	assert.Equal(t, ok, true)
 	assert.Equal(t, got, expect)
+}
 
+func TestRemoveAllOnCache(t *testing.T) {
+
+	ok := helpers.ClearCache()
+
+	assert.Equal(t, ok, true)
+}
+
+func TestGetAllOnUnexistentCache(t *testing.T) {
+
+	helpers.ClearCache()
+	v := helpers.ReturnAll()
+
+	assert.Equal(t, len(v), 0)
+}
+
+func TestGetAllOnCache(t *testing.T) {
+
+	helpers.SetCache("key", "v1")
+	helpers.SetCache("key2", "v2")
+
+	v := helpers.ReturnAll()
+
+	assert.Equal(t, len(v), 2)
 }
