@@ -4,7 +4,7 @@ var cache = make(map[string]string)
 
 func SetCache(k, v string) bool {
 
-	if len(cache) == 0 {
+	if HasLenInArray(cache) {
 		cache[k] = v
 		return true
 	}
@@ -27,7 +27,7 @@ func SetCache(k, v string) bool {
 
 func GetCache(k string) (string, bool) {
 
-	if len(cache) == 0 {
+	if HasLenInArray(cache) {
 		return "", false
 	}
 
@@ -48,4 +48,13 @@ func ReturnAll() map[string]string {
 func ClearCache() bool {
 	cache = make(map[string]string)
 	return true
+}
+
+func DeleteValueOnCache(k string) bool {
+
+	if HasLenInArray(cache) {
+		delete(cache, k)
+		return true
+	}
+	return false
 }
